@@ -277,6 +277,8 @@ $ preston ls -l tsv\
       2 portal.torcherbaria.org
 ```
 
+# Result Revisited
+
 After asking about the accessbility BisQue image locations at CyVerse, it appears that the server suffered from some intermittent downtime. 
 
 After re-tracking the image locations with previous unresolved content using:
