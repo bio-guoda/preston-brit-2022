@@ -324,8 +324,7 @@ $ preston cat hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4
 
 with the related image being:
 
-![preston cat hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e](21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e.
-jpg)
+![preston cat hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e](21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e.jpg)
 
 
 
