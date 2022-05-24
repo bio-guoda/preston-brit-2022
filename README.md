@@ -277,4 +277,178 @@ $ preston ls -l tsv\
       2 portal.torcherbaria.org
 ```
 
+After asking about the accessbility BisQue image locations at CyVerse, it appears that the server suffered from some intermittent downtime. 
+
+After re-tracking the image locations with previous unresolved content using:
+
+```
+$ preston ls -l tsv\
+ | grep hasVersion\
+ | grep well-known\
+ | cut -f1\
+ | xargs -L25 preston track
+```
+
+following this, 
+```
+$ preston ls -l tsv\
+>  | grep hasVersion\
+>  | grep -v ".well-known/genid"\
+>  | sed 's+https://++g'\
+>  | cut -f1\
+>  | sed 's+/.*++g'\
+>  | sort\
+>  | uniq -c\
+>  | sort -nr
+    735 bisque.cyverse.org
+    254 web.corral.tacc.utexas.edu
+     10 api.idigbio.org
+      2 sernecportal.org
+      2 portal.torcherbaria.org
+```
+
+was seen, which suggests that all 735 BisQue served images now have content associated to them.
+
+The first image re-resolve using BisQue service at CyVerse was the one below.
+
+
+```
+$ preston ls -l tsv\
+  | grep hasVersion\
+  | grep -v well-known\
+  | grep bisque\
+  | head -n1
+https://bisque.cyverse.org/image_service/image/00-ieZahoKgtcwyaSAEuRLeL7/resize:1250/format:jpeg	http://purl.org/pav/hasVersion	hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e	urn:uuid:7ca87d5a-f92e-43df-90c9-6cb509aa95eb
+$ preston cat hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e > 21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e.jpg
+```
+
+with the related image being:
+
+![preston cat hash://sha256/21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e](21f71ab31e8a559e1125dea3f1bff89ed193fc9d40878fced6d4cc92b153c71e.
+jpg)
+
+
+
+```
+$ preston ls\
+ | preston dwc-stream\
+ | grep "https://sernecportal.org/portal/collections/individual/index.php?occid=16667540"\
+ | jq .
+```
+
+```json
+{
+  "http://www.w3.org/ns/prov#wasDerivedFrom": "line:zip:hash://sha256/371984ca4566b7b6bc760d0766873b469e12af2d87ce9218f1da888a1b4c3948!/occurrences.csv!/L38393",
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://rs.tdwg.org/dwc/terms/Occurrence",
+  "http://rs.tdwg.org/dwc/terms/occurrenceRemarks": null,
+  "http://rs.tdwg.org/dwc/terms/subgenus": null,
+  "http://rs.tdwg.org/dwc/terms/associatedOccurrences": null,
+  "http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters": null,
+  "http://rs.tdwg.org/dwc/terms/identificationQualifier": null,
+  "http://rs.tdwg.org/dwc/terms/recordNumber": null,
+  "http://rs.tdwg.org/dwc/terms/georeferenceProtocol": null,
+  "http://rs.tdwg.org/dwc/terms/informationWithheld": null,
+  "http://rs.tdwg.org/dwc/terms/family": "Asteraceae",
+  "http://rs.tdwg.org/dwc/terms/verbatimElevation": null,
+  "https://symbiota.org/terms/recordID": "urn:uuid:2a5c093b-3cd5-4334-b3ab-ff60bd3012bd",
+  "http://rs.tdwg.org/dwc/terms/verbatimTaxonRank": null,
+  "http://purl.org/dc/terms/references": "https://sernecportal.org/portal/collections/individual/index.php?occid=16667540",
+  "http://rs.tdwg.org/dwc/terms/month": null,
+  "http://rs.tdwg.org/dwc/terms/fieldNumber": null,
+  "http://rs.tdwg.org/dwc/terms/dynamicProperties": null,
+  "http://rs.tdwg.org/dwc/terms/associatedTaxa": null,
+  "http://rs.tdwg.org/dwc/terms/endDayOfYear": null,
+  "http://rs.tdwg.org/dwc/terms/basisOfRecord": "PreservedSpecimen",
+  "http://rs.tdwg.org/dwc/terms/higherClassification": "Plantae|Magnoliophyta|Eudicots|Core Eudicots|Campanulids|Asterids|Asterales|Asteraceae|Eupatorium",
+  "http://rs.tdwg.org/dwc/terms/order": "Asterales",
+  "http://rs.tdwg.org/dwc/terms/reproductiveCondition": null,
+  "http://rs.tdwg.org/dwc/terms/georeferenceRemarks": null,
+  "http://rs.tdwg.org/dwc/terms/minimumDepthInMeters": null,
+  "http://rs.tdwg.org/dwc/terms/scientificName": "Eupatorium semiserratum",
+  "http://rs.tdwg.org/dwc/terms/recordedBy": null,
+  "http://rs.tdwg.org/dwc/terms/associatedSequences": null,
+  "https://symbiota.org/terms/recordEnteredBy": "preprocessed",
+  "http://rs.tdwg.org/dwc/terms/county": null,
+  "http://rs.tdwg.org/dwc/terms/georeferencedBy": null,
+  "http://purl.org/dc/elements/1.1/rights": "http://creativecommons.org/licenses/by-nc/3.0/",
+  "http://rs.tdwg.org/dwc/terms/occurrenceID": "2a5c093b-3cd5-4334-b3ab-ff60bd3012bd",
+  "http://rs.tdwg.org/dwc/terms/identificationRemarks": "identified as filed, taxon from folder transcription",
+  "http://rs.tdwg.org/dwc/terms/phylum": "Magnoliophyta",
+  "http://rs.tdwg.org/dwc/terms/taxonRank": "Species",
+  "http://rs.tdwg.org/dwc/terms/establishmentMeans": null,
+  "http://rs.tdwg.org/dwc/terms/collectionID": "9bec1885-8556-470e-80f3-f31ed15228b0",
+  "http://purl.org/dc/terms/modified": "2021-05-24 11:31:38",
+  "http://rs.tdwg.org/dwc/terms/maximumElevationInMeters": null,
+  "http://rs.tdwg.org/dwc/terms/dataGeneralizations": null,
+  "http://rs.tdwg.org/dwc/terms/municipality": null,
+  "http://rs.tdwg.org/dwc/terms/locationRemarks": null,
+  "http://purl.org/dc/terms/language": null,
+  "http://purl.org/dc/terms/rightsHolder": null,
+  "http://rs.tdwg.org/dwc/terms/verbatimEventDate": null,
+  "http://rs.tdwg.org/dwc/terms/dateIdentified": "12/27/18",
+  "http://rs.tdwg.org/dwc/terms/typeStatus": null,
+  "http://rs.tdwg.org/dwc/terms/minimumElevationInMeters": null,
+  "http://rs.tdwg.org/dwc/terms/disposition": null,
+  "http://rs.tdwg.org/dwc/terms/eventDate": null,
+  "http://rs.tdwg.org/dwc/terms/identificationReferences": null,
+  "http://rs.tdwg.org/dwc/terms/stateProvince": null,
+  "http://rs.tdwg.org/dwc/terms/ownerInstitutionCode": null,
+  "http://rs.tdwg.org/dwc/terms/eventID": null,
+  "http://rs.tdwg.org/dwc/terms/taxonRemarks": null,
+  "http://rs.tdwg.org/dwc/terms/scientificNameAuthorship": "DC.",
+  "http://rs.tdwg.org/dwc/terms/locality": null,
+  "http://rs.tdwg.org/dwc/terms/decimalLatitude": null,
+  "http://rs.tdwg.org/dwc/terms/verbatimCoordinates": null,
+  "http://rs.tdwg.org/dwc/terms/taxonID": "84133",
+  "http://rs.tdwg.org/dwc/terms/infraspecificEpithet": null,
+  "http://rs.tdwg.org/dwc/terms/habitat": null,
+  "http://rs.tdwg.org/dwc/terms/catalogNumber": "BRIT284584",
+  "http://rs.tdwg.org/dwc/terms/preparations": null,
+  "http://rs.tdwg.org/dwc/terms/sex": null,
+  "http://rs.tdwg.org/dwc/terms/georeferenceSources": null,
+  "http://rs.tdwg.org/dwc/terms/verbatimDepth": null,
+  "http://rs.tdwg.org/dwc/terms/collectionCode": null,
+  "http://rs.tdwg.org/dwc/terms/otherCatalogNumbers": null,
+  "http://rs.tdwg.org/dwc/terms/individualCount": null,
+  "http://purl.org/dc/terms/accessRights": null,
+  "http://rs.tdwg.org/dwc/terms/kingdom": "Plantae",
+  "http://rs.tdwg.org/dwc/terms/country": "United States",
+  "http://rs.tdwg.org/dwc/terms/year": null,
+  "http://rs.tdwg.org/dwc/terms/institutionCode": "VDB",
+  "http://rs.tdwg.org/dwc/terms/day": null,
+  "http://rs.tdwg.org/dwc/terms/lifeStage": null,
+  "http://rs.tdwg.org/dwc/terms/maximumDepthInMeters": null,
+  "http://rs.tdwg.org/dwc/terms/decimalLongitude": null,
+  "http://rs.tdwg.org/dwc/terms/specificEpithet": "semiserratum",
+  "http://rs.tdwg.org/dwc/terms/genus": "Eupatorium",
+  "http://rs.tdwg.org/dwc/terms/class": null,
+  "http://rs.tdwg.org/dwc/terms/geodeticDatum": null,
+  "http://rs.tdwg.org/dwc/terms/georeferenceVerificationStatus": null,
+  "http://rs.tdwg.org/dwc/terms/identifiedBy": "BRIT",
+  "http://rs.tdwg.org/dwc/terms/startDayOfYear": null
+}
+{
+  "http://www.w3.org/ns/prov#wasDerivedFrom": "line:zip:hash://sha256/371984ca4566b7b6bc760d0766873b469e12af2d87ce9218f1da888a1b4c3948!/multimedia.csv!/L38045",
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://rs.tdwg.org/ac/terms/Multimedia",
+  "http://rs.tdwg.org/ac/terms/providerManagedID": "urn:uuid:6ecdb0c3-fa7e-4918-ba14-e10cd019b091",
+  "http://purl.org/dc/terms/identifier": "https://bisque.cyverse.org/image_service/image/00-ieZahoKgtcwyaSAEuRLeL7/resize:4000/format:jpeg",
+  "http://rs.tdwg.org/ac/terms/accessURI": "https://bisque.cyverse.org/image_service/image/00-ieZahoKgtcwyaSAEuRLeL7/resize:4000/format:jpeg",
+  "http://ns.adobe.com/xap/1.0/rights/Owner": "Vanderbilt University Herbarium (VDB)",
+  "http://purl.org/dc/elements/1.1/creator": null,
+  "http://purl.org/dc/terms/type": "StillImage",
+  "http://purl.org/dc/terms/rights": null,
+  "http://ns.adobe.com/xap/1.0/rights/UsageTerms": "CC BY-NC (Attribution-Non-Commercial)",
+  "http://rs.tdwg.org/ac/terms/subtype": "Photograph",
+  "http://purl.org/dc/terms/format": "image/jpeg",
+  "http://rs.tdwg.org/ac/terms/metadataLanguage": "en",
+  "http://rs.tdwg.org/ac/terms/caption": null,
+  "http://rs.tdwg.org/ac/terms/thumbnailAccessURI": "https://bisque.cyverse.org/image_service/image/00-ieZahoKgtcwyaSAEuRLeL7/thumbnail:200,200",
+  "http://ns.adobe.com/xap/1.0/rights/WebStatement": "http://creativecommons.org/licenses/by-nc/3.0/",
+  "http://rs.tdwg.org/ac/terms/associatedSpecimenReference": "https://sernecportal.org/portal/collections/individual/index.php?occid=16667540",
+  "http://rs.tdwg.org/ac/terms/comments": null,
+  "http://rs.tdwg.org/ac/terms/goodQualityAccessURI": "https://bisque.cyverse.org/image_service/image/00-ieZahoKgtcwyaSAEuRLeL7/resize:1250/format:jpeg",
+  "http://ns.adobe.com/xap/1.0/MetadataDate": "2017-11-03 10:08:32"
+}
+```
+
 
