@@ -40,7 +40,10 @@ so took about 10 minutes.
 An example of a tracked image shown below was extraced using:
 
 ```
-$ preston ls -l tsv  |grep hasVersion | grep -v "well-known" | tail -n1
+$ preston ls -l tsv\
+ | grep hasVersion\
+ | grep -v "well-known"\
+ | tail -n1
 https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101_med.jpg	http://purl.org/pav/hasVersion	hash://sha256/5807395372135bbc50350ebae598c9484cb279cc2d17b003a06626f03fb0853e	urn:uuid:6d46581e-8dfa-4c90-96d4-c06155b2b2ee
 $ preston cat hash://sha256/5807395372135bbc50350ebae598c9484cb279cc2d17b003a06626f03fb0853e > BRIT452101_med.jpg
 ```
@@ -242,7 +245,15 @@ Preston reports non-responsive URLs as skolemized blanks see https://www.w3.org/
 Using this labeling of non-responsible image URLs, the following servers produced non-responsive urls:
 
 ```
-$ preston ls -l tsv  | grep hasVersion | grep ".well-known/genid" | sed 's+https://++g' | cut -f1 | sed 's+/.*++g' | sort | uniq -c | sort -nr
+$ preston ls -l tsv\
+ | grep hasVersion\
+ | grep ".well-known/genid"\
+ | sed 's+https://++g'\
+ | cut -f1\
+ | sed 's+/.*++g'\
+ | sort\
+ | uniq -c\
+ | sort -nr
     735 bisque.cyverse.org
 ```
 
@@ -251,8 +262,15 @@ suggesting that most, if not all, image URLs served via bisque.cyverse.org are n
 Responsive image URLs from the 1000 randomly sampled set come from the following servers:
 
 ```
-$ preston ls -l tsv  | grep hasVersion | grep ".well-known/genid" | sed 's+https://++g' | cut -f1 | sed 's+/.*++g' | sort | uniq -c | sort -nr
-$ preston ls -l tsv  | grep hasVersion | grep -v ".well-known/genid" | sed 's+https://++g' | cut -f1 | sed 's+/.*++g' | sort | uniq -c | sort -nr
+$ preston ls -l tsv\
+ | grep hasVersion\
+ | grep -v ".well-known/genid"\
+ | sed 's+https://++g'\
+ | cut -f1\
+ | sed 's+/.*++g'\
+ | sort\
+ | uniq -c\
+ | sort -nr
     254 web.corral.tacc.utexas.edu
      10 api.idigbio.org
       2 sernecportal.org
