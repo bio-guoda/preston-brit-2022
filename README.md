@@ -3,7 +3,7 @@ This experimental biodiversity datasets describes BRIT records and associated im
 
 # Methods 
 
-Preston v0.3.9 was used to index all image urls published across three BRIT related to DwC-A records using:
+Preston v0.3.9 was used to index 825,877 image urls published across three BRIT related to DwC-A records using:
 
 ```bash
 # lists image urls after tracking dwca archives
@@ -13,10 +13,10 @@ preston track https://sernecportal.org/portal/content/dwca/VDB_DwC-A.zip\
  | preston dwc-stream\
  | grep URI\
  | jq --raw-output '.["http://rs.tdwg.org/ac/terms/accessURI" | "http://rs.tdwg.org/ac/terms/thumbnailAccessURI" | "http://rs.tdwg.org/ac/terms/goodQualityAccessURI"]'\
- > image-urls.tsv
-
+ | gzip\
+ > image-urls.tsv.gz
  # list image urls and track them
- cat image-urls.tsv | xargs -L25 preston track
+ cat image-urls.tsv.gz | gunzip | xargs -L25 preston track
  ```
 
 The tracked image urls were retrieved using a server in a data center in Germany on a ~ 1Gb connection .
