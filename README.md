@@ -6,6 +6,12 @@ Botanical Research Institute Texas (BRIT): Origins of BRIT collection records an
 
 ![qrcode](./label.png)
 
+Related datasets include, obtained via ```preston ls | preston cite```:
+
+SERNEC - 5d18ed85-2217-4a65-b415-d210725df572. Accessed at <zip:hash://sha256/371984ca4566b7b6bc760d0766873b469e12af2d87ce9218f1da888a1b4c3948!/eml.xml> .
+SERNEC - e77c6bda-21ea-41a4-ace2-fb08bc160e03. Accessed at <zip:hash://sha256/c208c09101b39d534e2a9700d8abf43357f1c7707a6b5590aa528fe78d56cfbe!/eml.xml> .
+TORCH Portal - af5fc908-bfa8-49a6-b37a-07849fe523a8. Accessed at <zip:hash://sha256/28ebbca9c3e3d092e6193f5f54f476815f4e347ff79b1bb7de07090e78a648ea!/eml.xml> .
+
 
 # Methods 
 
