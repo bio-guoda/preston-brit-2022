@@ -1,6 +1,12 @@
+by Jorrit H. Poelen 
+https://orcid.org/0000-0003-3138-4118 
+2022-09-15
+
+# On Enabling Fast and Secure Access to Herbarium Specimen Images
+
 [```methods```](#methods) / [```results```](#results) / [```conclusion```](#conclusion) / [```discussion```](#discussion) 
 
-This experimental biodiversity datasets describes Botanical Research Institute Texas (BRIT) records and associated images: 
+This experimental data paper describes a method to facilitate fast and secure use of Botanical Research Institute Texas (BRIT) records and associated images: 
 
 Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94
 
