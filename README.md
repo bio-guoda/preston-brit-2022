@@ -4,7 +4,7 @@ This experimental biodiversity datasets describes Botanical Research Institute T
 
 Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94
 
-![qrcode](./label.png)
+[![qrcode](./label.png)](https://zxing.org/w/decode?u=https%3A%2F%2Fgithub.com%2Fbio-guoda%2Fpreston-brit-2022%2Fraw%2Fmain%2Flabel.png)
 
 Related datasets include, obtained via ```preston ls | preston cite```:
 
