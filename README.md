@@ -1,9 +1,15 @@
-This experimental biodiversity datasets describes BRIT records and associated images. 
+This experimental biodiversity datasets describes Botanical Research Institute Texas (BRIT) records and associated images. 
+
+# Citation
+
+Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/18b51a180c63929d5e3a50dbb72295579c2645546d22ae3fdcd5e2095c43d199 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/18b51a180c63929d5e3a50dbb72295579c2645546d22ae3fdcd5e2095c43d199
+
+![qrcode](./label.png)
 
 
 # Methods 
 
-Preston v0.3.9 was used to index 825,877 image urls published across three BRIT related to DwC-A records using:
+[Preston](https://github.com/bio-guoda/preston) v0.3.9 was used to index 825,877 image urls published across three BRIT related to DwC-A records using:
 
 ```bash
 # lists image urls after tracking dwca archives
@@ -33,7 +39,7 @@ $ preston history --data-dir $PWD | tail -n1 | preston cat --data-dir $PWD | gre
 2022-07-26T16:47:05.428Z
 ```
 
-so took about 1 month and 20 days.
+so took about 1 month and 20 days at about 0.2 images/s or 1 image per 5 seconds.
 
 # Results
 
@@ -43,12 +49,13 @@ An example of a tracked image shown below was extraced using:
 $ preston ls -l tsv\
  | grep hasVersion\
  | grep -v "well-known"\
- | tail -n1
-https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101_med.jpg	http://purl.org/pav/hasVersion	hash://sha256/5807395372135bbc50350ebae598c9484cb279cc2d17b003a06626f03fb0853e	urn:uuid:6d46581e-8dfa-4c90-96d4-c06155b2b2ee
-$ preston cat hash://sha256/5807395372135bbc50350ebae598c9484cb279cc2d17b003a06626f03fb0853e > BRIT452101_med.jpg
+ | grep -v "zip"\
+ | head -n1
+https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/resize:1250/format:jpeg	http://purl.org/pav/hasVersion	hash://sha256/a3e5efdcd9905154afea689e7e3c2756521d51265378118a66027c77eba35e06	urn:uuid:063c8cb0-b0b7-469e-a9b8-65e99803ad54
+$ preston cat --remote https://linker.bio hash://sha256/a3e5efdcd9905154afea689e7e3c2756521d51265378118a66027c77eba35e06 > BRIT67501.jpg
 ```
 
-![BRIT452101_med.jpg](BRIT452101_med.jpg)
+![BRIT67501.jpg](BRIT67501.jpg)
 
 with caption generated using:
 
@@ -57,122 +64,33 @@ $ preston ls\
  | grep hasVersion\
  | grep zip\
  | preston dwc-stream\
- | grep BRIT452101\
+ | grep "https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/resize:1250/format:jpeg"\
  | jq .
 ```
 
 ```json 
 {
-  "http://www.w3.org/ns/prov#wasDerivedFrom": "line:zip:hash://sha256/28ebbca9c3e3d092e6193f5f54f476815f4e347ff79b1bb7de07090e78a648ea!/occurrences.csv!/L129118",
-  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://rs.tdwg.org/dwc/terms/Occurrence",
-  "http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters": null,
-  "http://rs.tdwg.org/dwc/terms/informationWithheld": null,
-  "http://rs.tdwg.org/dwc/terms/minimumElevationInMeters": null,
-  "http://rs.tdwg.org/dwc/terms/specificEpithet": "drummondii",
-  "http://rs.tdwg.org/dwc/terms/individualCount": null,
-  "http://rs.tdwg.org/dwc/terms/stateProvince": "Texas",
-  "http://rs.tdwg.org/dwc/terms/family": "Sapindaceae",
-  "http://rs.tdwg.org/dwc/terms/georeferenceSources": null,
-  "http://rs.tdwg.org/dwc/terms/verbatimEventDate": null,
-  "https://symbiota.org/terms/recordID": "urn:uuid:606c50c8-fccb-44a9-af1e-411766713fcf",
-  "http://rs.tdwg.org/dwc/terms/dynamicProperties": null,
-  "http://rs.tdwg.org/dwc/terms/locality": "Independence Creek near Pecos River. P. O. Dryden.",
-  "http://rs.tdwg.org/dwc/terms/georeferencedBy": null,
-  "http://rs.tdwg.org/dwc/terms/georeferenceRemarks": null,
-  "http://rs.tdwg.org/dwc/terms/minimumDepthInMeters": null,
-  "http://rs.tdwg.org/dwc/terms/decimalLongitude": null,
-  "http://rs.tdwg.org/dwc/terms/typeStatus": null,
-  "http://rs.tdwg.org/dwc/terms/year": "1963",
-  "http://rs.tdwg.org/dwc/terms/endDayOfYear": null,
-  "http://rs.tdwg.org/dwc/terms/maximumDepthInMeters": null,
-  "http://rs.tdwg.org/dwc/terms/occurrenceRemarks": null,
-  "http://rs.tdwg.org/dwc/terms/country": "United States",
-  "http://rs.tdwg.org/dwc/terms/maximumElevationInMeters": null,
-  "http://rs.tdwg.org/dwc/terms/occurrenceID": "606c50c8-fccb-44a9-af1e-411766713fcf",
-  "https://symbiota.org/terms/recordEnteredBy": "preprocessed",
-  "http://rs.tdwg.org/dwc/terms/ownerInstitutionCode": null,
-  "http://purl.org/dc/terms/accessRights": null,
-  "http://rs.tdwg.org/dwc/terms/collectionCode": null,
-  "http://rs.tdwg.org/dwc/terms/recordedBy": "Delzie Demaree",
-  "http://rs.tdwg.org/dwc/terms/lifeStage": null,
-  "http://rs.tdwg.org/dwc/terms/day": "16",
-  "http://rs.tdwg.org/dwc/terms/associatedSequences": null,
-  "http://rs.tdwg.org/dwc/terms/verbatimDepth": null,
-  "http://rs.tdwg.org/dwc/terms/identificationQualifier": null,
-  "http://rs.tdwg.org/dwc/terms/order": "Sapindales",
-  "http://rs.tdwg.org/dwc/terms/georeferenceVerificationStatus": null,
-  "http://purl.org/dc/terms/references": "https://portal.torcherbaria.org/portal/collections/individual/index.php?occid=24923936",
-  "http://rs.tdwg.org/dwc/terms/collectionID": "fea81a47-2365-45cc-bef9-b6bbff7457e6",
-  "http://rs.tdwg.org/dwc/terms/geodeticDatum": null,
-  "http://rs.tdwg.org/dwc/terms/reproductiveCondition": null,
-  "http://rs.tdwg.org/dwc/terms/preparations": null,
-  "http://rs.tdwg.org/dwc/terms/subgenus": null,
-  "http://rs.tdwg.org/dwc/terms/county": "Terrell",
-  "http://rs.tdwg.org/dwc/terms/kingdom": "Plantae",
-  "http://rs.tdwg.org/dwc/terms/establishmentMeans": null,
-  "http://purl.org/dc/terms/rightsHolder": "Botanical Research Institute of Texas",
-  "http://rs.tdwg.org/dwc/terms/taxonRemarks": null,
-  "http://rs.tdwg.org/dwc/terms/georeferenceProtocol": null,
-  "http://rs.tdwg.org/dwc/terms/sex": null,
-  "http://rs.tdwg.org/dwc/terms/otherCatalogNumbers": null,
-  "http://rs.tdwg.org/dwc/terms/fieldNumber": null,
-  "http://rs.tdwg.org/dwc/terms/identifiedBy": null,
-  "http://rs.tdwg.org/dwc/terms/scientificName": "Sapindus drummondii",
-  "http://rs.tdwg.org/dwc/terms/habitat": "Elevation ft. 1800. 12 ft. tall. Rocky bottom",
-  "http://rs.tdwg.org/dwc/terms/associatedOccurrences": null,
-  "http://rs.tdwg.org/dwc/terms/verbatimCoordinates": null,
-  "http://rs.tdwg.org/dwc/terms/recordNumber": "48417",
-  "http://purl.org/dc/terms/modified": "2020-09-25 10:38:07",
-  "http://rs.tdwg.org/dwc/terms/class": null,
-  "http://rs.tdwg.org/dwc/terms/verbatimTaxonRank": null,
-  "http://rs.tdwg.org/dwc/terms/institutionCode": "BRIT",
-  "http://rs.tdwg.org/dwc/terms/disposition": null,
-  "http://rs.tdwg.org/dwc/terms/phylum": "Magnoliophyta",
-  "http://rs.tdwg.org/dwc/terms/identificationRemarks": null,
-  "http://rs.tdwg.org/dwc/terms/eventDate": "1963-07-16",
-  "http://purl.org/dc/terms/language": null,
-  "http://rs.tdwg.org/dwc/terms/month": "7",
-  "http://rs.tdwg.org/dwc/terms/scientificNameAuthorship": "Hook. & Arn.",
-  "http://rs.tdwg.org/dwc/terms/infraspecificEpithet": null,
-  "http://rs.tdwg.org/dwc/terms/dateIdentified": null,
-  "http://purl.org/dc/elements/1.1/rights": "http://creativecommons.org/licenses/by/4.0/",
-  "http://rs.tdwg.org/dwc/terms/municipality": null,
-  "http://rs.tdwg.org/dwc/terms/identificationReferences": null,
-  "http://rs.tdwg.org/dwc/terms/genus": "Sapindus",
-  "http://rs.tdwg.org/dwc/terms/basisOfRecord": "PreservedSpecimen",
-  "http://rs.tdwg.org/dwc/terms/taxonID": "15950",
-  "http://rs.tdwg.org/dwc/terms/locationRemarks": null,
-  "http://rs.tdwg.org/dwc/terms/catalogNumber": "BRIT452101",
-  "http://rs.tdwg.org/dwc/terms/verbatimElevation": null,
-  "http://rs.tdwg.org/dwc/terms/higherClassification": "Plantae|Magnoliophyta|Eudicots|Core Eudicots|Malvids|Rosids|Sapindales|Sapindaceae|Sapindus",
-  "http://rs.tdwg.org/dwc/terms/dataGeneralizations": null,
-  "http://rs.tdwg.org/dwc/terms/eventID": null,
-  "http://rs.tdwg.org/dwc/terms/taxonRank": "Species",
-  "http://rs.tdwg.org/dwc/terms/startDayOfYear": "197",
-  "http://rs.tdwg.org/dwc/terms/associatedTaxa": null,
-  "http://rs.tdwg.org/dwc/terms/decimalLatitude": null
-}
-{
-  "http://www.w3.org/ns/prov#wasDerivedFrom": "line:zip:hash://sha256/28ebbca9c3e3d092e6193f5f54f476815f4e347ff79b1bb7de07090e78a648ea!/multimedia.csv!/L102995",
+  "http://www.w3.org/ns/prov#wasDerivedFrom": "line:zip:hash://sha256/371984ca4566b7b6bc760d0766873b469e12af2d87ce9218f1da888a1b4c3948!/multimedia.csv!/L2",
   "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": "http://rs.tdwg.org/ac/terms/Multimedia",
-  "http://rs.tdwg.org/ac/terms/comments": null,
-  "http://rs.tdwg.org/ac/terms/metadataLanguage": "en",
-  "http://purl.org/dc/terms/identifier": "https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101.jpg",
-  "http://purl.org/dc/elements/1.1/creator": null,
-  "http://ns.adobe.com/xap/1.0/MetadataDate": "2020-05-16 15:32:09",
+  "http://rs.tdwg.org/dwc/text/coreid": "6816308",
+  "http://ns.adobe.com/xap/1.0/rights/Owner": "Vanderbilt University Herbarium (VDB)",
+  "http://ns.adobe.com/xap/1.0/MetadataDate": "2018-02-02 11:58:22",
+  "http://ns.adobe.com/xap/1.0/rights/WebStatement": "http://creativecommons.org/licenses/by-nc/3.0/",
   "http://purl.org/dc/terms/type": "StillImage",
-  "http://purl.org/dc/terms/format": "image/jpeg",
-  "http://rs.tdwg.org/ac/terms/caption": null,
-  "http://ns.adobe.com/xap/1.0/rights/WebStatement": "http://creativecommons.org/licenses/by/4.0/",
-  "http://rs.tdwg.org/ac/terms/thumbnailAccessURI": "https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101_thumb.jpg",
+  "http://rs.tdwg.org/ac/terms/associatedSpecimenReference": "https://sernecportal.org/portal/collections/individual/index.php?occid=6816308",
   "http://rs.tdwg.org/ac/terms/subtype": "Photograph",
-  "http://rs.tdwg.org/ac/terms/accessURI": "https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101.jpg",
-  "http://purl.org/dc/terms/rights": null,
-  "http://ns.adobe.com/xap/1.0/rights/UsageTerms": "CC BY-NC-SA (Attribution-NonCommercial-ShareAlike)",
-  "http://rs.tdwg.org/ac/terms/goodQualityAccessURI": "https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0452000/BRIT452101_med.jpg",
-  "http://ns.adobe.com/xap/1.0/rights/Owner": "Botanical Research Institute of Texas",
-  "http://rs.tdwg.org/ac/terms/providerManagedID": "urn:uuid:da7f9fe0-225d-409f-8243-10ca07bb3505",
-  "http://rs.tdwg.org/ac/terms/associatedSpecimenReference": "https://portal.torcherbaria.org/portal/collections/individual/index.php?occid=24923936"
+  "http://rs.tdwg.org/ac/terms/caption": null,
+  "http://rs.tdwg.org/ac/terms/thumbnailAccessURI": "https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/thumbnail:200,200",
+  "http://purl.org/dc/terms/format": "image/jpeg",
+  "http://rs.tdwg.org/ac/terms/comments": null,
+  "http://rs.tdwg.org/ac/terms/providerManagedID": "urn:uuid:36fd1d6c-3a2b-4cc0-b640-e93c2b400a01",
+  "http://rs.tdwg.org/ac/terms/accessURI": "https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/resize:4000/format:jpeg",
+  "http://rs.tdwg.org/ac/terms/goodQualityAccessURI": "https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/resize:1250/format:jpeg",
+  "http://purl.org/dc/elements/1.1/creator": null,
+  "http://ns.adobe.com/xap/1.0/rights/UsageTerms": "CC BY-NC (Attribution-Non-Commercial)",
+  "http://rs.tdwg.org/ac/terms/metadataLanguage": "en",
+  "http://purl.org/dc/terms/identifier": "https://bisque.cyverse.org/image_service/image/00-Bu6svkTKkNx5hdB8niSokV/resize:4000/format:jpeg",
+  "http://purl.org/dc/terms/rights": null
 }
 ```
 
