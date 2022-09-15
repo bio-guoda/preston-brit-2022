@@ -49,6 +49,8 @@ so took about 1 month and 20 days at about 0.2 images/s or 1 image per 5 seconds
 
 # Results
 
+## Example Image
+
 An example of a tracked image shown below was extraced using:
 
 ```
@@ -102,6 +104,8 @@ $ preston ls\
 
 More concisely, this sampled BRIT image corpus can be reference using a citation signature hash://sha256/18b51a180c63929d5e3a50dbb72295579c2645546d22ae3fdcd5e2095c43d199 . 
 
+## Image Origins
+
 For this corpus, the following servers were queried for reported image urls:
 
 ```
@@ -116,6 +120,9 @@ $ preston ls --data-dir $PWD  -l tsv  | grep hasVersion | sed 's+https://++g' | 
      10 urn:null
       4 inaturalist-open-data.s3.amazonaws.com
 ```
+
+
+## Images Not Found
 
 Preston reports non-responsive URLs as skolemized blanks see https://www.w3.org/TR/rdf11-concepts/#section-skolemization .
 
@@ -136,8 +143,6 @@ $ preston ls -l tsv\
      10 urn:null
       3 portal.torcherbaria.org
 ```
-
-# Result Revisited
 
 The following reported 156 image locations appeared to yield no content on tracking them a first time. (see also https://github.com/bio-guoda/preston-brit-2022/issues/1) 
 
@@ -338,6 +343,55 @@ https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202006/field_madder-627
 https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202007/scf_35-2_1595371669.jpg
 https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202010/IMG_0846_1601579155.jpg
 ```
+
+## Data Transfer from Germany to US
+
+The BRIT images were originally tracked from Germany on a commercial "off-the-shelve" server. To facilitate access, and increase redudancy, rsync was used to transfer the image corpus from Germany to the Minnesota. 
+
+After receiving storage hardware by mail on 4 Sept 2022, the BRIT image corpus hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 was received in Minnesota, US from Germany on 5 Sept 2022. The corpus spanned over 900k files / 309GB and was transferred in about 21h (see below for details) via a consumer grade fiber internet connection. 
+
+![delivery](./brit-delivery-2022-09-04-A.jpeg)
+
+The total number of files in the received ```data``` directory was:
+
+```
+$ find . -type f | wc -l
+902626
+```
+
+Also, the Rsync logs below captured the transfer statistics. 
+```
+[...]
+
+data/ff/ff/ffffe29becf0e65f3c32f9bb53f18f418fc0e6ff432ab1b2176bad560930be99
+        358,999 100%    2.18MB/s    0:00:00 (xfr#902621, to-chk=2/968416)
+data/ff/ff/ffffe5eedcebb869f14ecf6cce5b5fcea629ae363ce833431bba46a19f8eb6c8
+             78 100%    0.49kB/s    0:00:00 (xfr#902622, to-chk=1/968416)
+data/ff/ff/ffffff8aa693c59e91b94e4de61d7ce035c69c94077ccf158e3d23a0a039216f
+        383,141 100%    2.12MB/s    0:00:00 (xfr#902623, to-chk=0/968416)
+
+sent 17,752,067 bytes  received 329,479,912,584 bytes  4,412,629.51 bytes/sec
+total size is 329,293,755,413  speedup is 1.00
+```
+
+Finally, the ```time``` program recorded and logged the duration of the transfer. 
+
+```
+real    1244m30.854s
+user    98m36.885s
+sys    55m19.359s
+```
+
+## Local Verification and Duplication
+
+After completing the transatlantic transfer onto a USB 3.0 Seagate Expansion HDD 18TB STKP180000402 PN 3EGAPR-570 connected using a Lenovo T430 running Ubuntu Ubuntu 20.04.5 LTS using Intel® Core™ i5-3320M CPU @ 2.60GHz × 4 and 8GB of memory, the content was duplicated locally to a WD Elements 5TB PN WDBU6Y0050BBK-XD.  The rsync local replication took a little over an hour (~81 minutes), and the preston-based verification took under 7 hours (322 minutes). The verification checks the local copy and verifies whether the reference content is actually present and has the expected content. Content verification is a computationally heavy operation because hundreds of thousands of files are processed and their cryptographic hashes are re-computed. The verification reported no missing or altered content. 
+
+
+## Transfer by USPS
+
+To demonstrate that the image corpus can be transferred without using the internet, the Seagate Expansion HDD 18TB containing the BRIT image corpus copy was labeled and shipped by US Postal Service on 16 Sept 2022.
+
+
 
 
 
