@@ -213,9 +213,7 @@ The results suggest that (a) keeping local copy of an image corpus are expected 
 
 
 > Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94
-
 > [![qrcode](./label.png)](https://zxing.org/w/decode?u=https%3A%2F%2Fgithub.com%2Fbio-guoda%2Fpreston-brit-2022%2Fraw%2Fmain%2Flabel.png)
----
 
 
 Over the last decades, millions of dollars have been invested in digitizing existing collections. Now, readily available methods, like those implemented by rsync and Preston, may help unleash the full potential of this ever growing corpus of digital resources by increasing processing speeds of verifiable, and clonable, image corpora.
