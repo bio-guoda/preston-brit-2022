@@ -107,7 +107,7 @@ $ preston ls\
 }
 ```
 
-More concisely, this sampled BRIT image corpus can be reference using a citation signature hash://sha256/18b51a180c63929d5e3a50dbb72295579c2645546d22ae3fdcd5e2095c43d199 . 
+More concisely, this sampled BRIT image corpus can be reference using a citation signature hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e . 
 
 ## Image Origins
 
