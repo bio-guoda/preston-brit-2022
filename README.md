@@ -1,6 +1,6 @@
-This experimental biodiversity datasets describes Botanical Research Institute Texas (BRIT) records and associated images. 
+[```methods```](#methods) / [```results```](#results) / [```conclusion```](#conclusion) / [```discussion```](#discussion) 
 
-# Citation
+This experimental biodiversity datasets describes Botanical Research Institute Texas (BRIT) records and associated images: 
 
 Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94
 
@@ -11,7 +11,6 @@ Related datasets include, obtained via ```preston ls | preston cite```:
 SERNEC - 5d18ed85-2217-4a65-b415-d210725df572. Accessed at <zip:hash://sha256/371984ca4566b7b6bc760d0766873b469e12af2d87ce9218f1da888a1b4c3948!/eml.xml> .
 SERNEC - e77c6bda-21ea-41a4-ace2-fb08bc160e03. Accessed at <zip:hash://sha256/c208c09101b39d534e2a9700d8abf43357f1c7707a6b5590aa528fe78d56cfbe!/eml.xml> .
 TORCH Portal - af5fc908-bfa8-49a6-b37a-07849fe523a8. Accessed at <zip:hash://sha256/28ebbca9c3e3d092e6193f5f54f476815f4e347ff79b1bb7de07090e78a648ea!/eml.xml> .
-
 
 # Methods 
 
@@ -144,8 +143,89 @@ $ preston ls -l tsv\
       3 portal.torcherbaria.org
 ```
 
-The following reported 156 image locations appeared to yield no content on tracking them a first time. (see also https://github.com/bio-guoda/preston-brit-2022/issues/1) 
+156 image locations appeared to yield no content on tracking them a first time. (see [#Appendix-A] and https://github.com/bio-guoda/preston-brit-2022/issues/1) 
 
+
+On retrying the inaccessible content locations, only 33 remained inaccessible (see [#Appendix-B]), hinting to intermittent and permanent access issues.
+
+## Data Transfer from Germany to US
+
+The BRIT images were originally tracked from Germany on a commercial "off-the-shelve" server. To facilitate access, and increase redudancy, rsync was used to transfer the image corpus from Germany to the Minnesota. 
+
+After receiving storage hardware by mail on 4 Sept 2022, the BRIT image corpus hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 was received in Minnesota, US from Germany on 5 Sept 2022. The corpus spanned over 900k files / 309GB and was transferred in about 21h (see below for details) via a consumer grade fiber internet connection. 
+
+![delivery](./brit-delivery-2022-09-04-A.jpeg)
+
+The total number of files in the received ```data``` directory was:
+
+```
+$ find . -type f | wc -l
+902626
+```
+
+Also, the Rsync logs below captured the transfer statistics. 
+```
+[...]
+
+data/ff/ff/ffffe29becf0e65f3c32f9bb53f18f418fc0e6ff432ab1b2176bad560930be99
+        358,999 100%    2.18MB/s    0:00:00 (xfr#902621, to-chk=2/968416)
+data/ff/ff/ffffe5eedcebb869f14ecf6cce5b5fcea629ae363ce833431bba46a19f8eb6c8
+             78 100%    0.49kB/s    0:00:00 (xfr#902622, to-chk=1/968416)
+data/ff/ff/ffffff8aa693c59e91b94e4de61d7ce035c69c94077ccf158e3d23a0a039216f
+        383,141 100%    2.12MB/s    0:00:00 (xfr#902623, to-chk=0/968416)
+
+sent 17,752,067 bytes  received 329,479,912,584 bytes  4,412,629.51 bytes/sec
+total size is 329,293,755,413  speedup is 1.00
+```
+
+Finally, the ```time``` program recorded and logged the duration of the transfer. 
+
+```
+real    1244m30.854s
+user    98m36.885s
+sys    55m19.359s
+```
+
+## Local Verification and Duplication
+
+After completing the transatlantic transfer onto a USB 3.0 Seagate Expansion HDD 18TB STKP180000402 PN 3EGAPR-570 connected using a Lenovo T430 running Ubuntu Ubuntu 20.04.5 LTS using Intel® Core™ i5-3320M CPU @ 2.60GHz × 4 and 8GB of memory, the content was duplicated locally to a WD Elements 5TB PN WDBU6Y0050BBK-XD.  The rsync local replication took a little over an hour (~81 minutes), and the preston-based verification took under 7 hours (322 minutes). The verification checks the local copy and verifies whether the reference content is actually present and has the expected content. Content verification is a computationally heavy operation because hundreds of thousands of files are processed and their cryptographic hashes are re-computed. The verification reported no missing or altered content. 
+
+
+## Transfer by USPS
+
+To demonstrate that the image corpus can be transferred without using the internet, the Seagate Expansion HDD 18TB containing the BRIT image corpus copy was labeled and shipped by US Postal Service on 16 Sept 2022.
+
+# Conclusion
+
+In period 2022-06/2022-07, images related to three herbarium collections managed by Botanical Research Institute of Texas spanned across primarily two resource locations: (1) bisque.cyverse.org and (2) web.corral.tacc.utexas.edu . The results show that the referenced specimen images were (mostly) successfully transfered (transfer A) in about 2 months at a sustained rate of about 1 image per 5 seconds. A similar transatlantic transfer (transfer B) of this image collection was performed using rsync in 21 hours, showing that transfer B was about 60x more efficient in transferring >800k images than transfer A. Repeating a similar transfer (transfer C) locally took a little over an hour, yielded another order of magnitude in transfer speed improvement, suggesting that the network, not local I/O nor computation, in transfer B was the primary bottleneck compared to transfer C. 
+
+Finally, the data was transferred on an external harddisk using the US Postal Service from Minnesota to Texas using Priority Mail (transfer D). Given that this transfer takes less than two months, this transfer will be faster than transfer A.
+
+
+# Discussion
+
+The results suggest that (a) keeping local copy of an image corpus are expected to increase image access speeds by orders of magnitude, (b) BRIT current image access services are optimized for viewing individual images manually, (c) Preston can be used to make identical copies of image corpora of known provenance (or origin) while allowing for verification of the authenticity of the referenced image corpus, and (d) Preston can be used to securely cite a corpus of hundreds of thousands of images in a single line, or if needed, using a single QR code:
+
+```
+Botanical Research Institute Texas (BRIT): Origins of BRIT collection records and associated images tracked in period 2022-06/2022-07. hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 https://github.com/bio-guoda/preston-brit-2022 https://linker.bio/hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94
+```
+
+[![qrcode](./label.png)](https://zxing.org/w/decode?u=https%3A%2F%2Fgithub.com%2Fbio-guoda%2Fpreston-brit-2022%2Fraw%2Fmain%2Flabel.png)
+
+Over the last decades, millions of dollars have been invested in digitizing existing collections. Now, readily available methods, like those implemented by rsync and Preston, may help unleash the full potential of this ever growing corpus of digital resources by increasing processing speeds of verifiable, and clonable, image corpora.
+
+# References
+
+MJ Elliott, JH Poelen, JAB Fortes (2020). Toward Reliable Biodiversity Dataset References. Ecological Informatics. https://doi.org/10.1016/j.ecoinf.2020.101132
+
+(preprint) Elliott, M. J., Poelen, J. H., & Fortes, J. (2022, August 29). Signed Citations: Making Persistent and Verifiable Citations of Digital Scientific Content. https://doi.org/10.31222/osf.io/wycjn
+
+Jorrit Poelen, Michael Elliott, Icaro Alzuru, & partha04patel. (2022). bio-guoda/preston: (0.3.9). Zenodo. https://doi.org/10.5281/zenodo.6473955 .
+
+
+# Appendix A
+
+Missing images 
 
 ```
 https://bisque.cyverse.org/image_service/image/00-fXkw8KPeArtBjNrpPHtvTU/resize:1250/format:jpeg
@@ -306,7 +386,9 @@ https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0368000/BRIT368409_med.jpg
 https://web.corral.tacc.utexas.edu/torch/BRIT/BRIT0368000/BRIT368730_med.jpg
 ```
 
-On retrying the inaccessible content locations, only 33 remained inaccessible, hinting to intermittent and permanent access issues:
+# Appendix B
+
+Missing images after retry. 
 
 ```
 https://bisque.cyverse.org/image_service/image/00-7J9FqXFGUzAyrVZbgJJoGG/resize:1250/format:jpeg
@@ -343,55 +425,4 @@ https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202006/field_madder-627
 https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202007/scf_35-2_1595371669.jpg
 https://portal.torcherbaria.org/imglib/seinet/torch/BRIT/202010/IMG_0846_1601579155.jpg
 ```
-
-## Data Transfer from Germany to US
-
-The BRIT images were originally tracked from Germany on a commercial "off-the-shelve" server. To facilitate access, and increase redudancy, rsync was used to transfer the image corpus from Germany to the Minnesota. 
-
-After receiving storage hardware by mail on 4 Sept 2022, the BRIT image corpus hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 was received in Minnesota, US from Germany on 5 Sept 2022. The corpus spanned over 900k files / 309GB and was transferred in about 21h (see below for details) via a consumer grade fiber internet connection. 
-
-![delivery](./brit-delivery-2022-09-04-A.jpeg)
-
-The total number of files in the received ```data``` directory was:
-
-```
-$ find . -type f | wc -l
-902626
-```
-
-Also, the Rsync logs below captured the transfer statistics. 
-```
-[...]
-
-data/ff/ff/ffffe29becf0e65f3c32f9bb53f18f418fc0e6ff432ab1b2176bad560930be99
-        358,999 100%    2.18MB/s    0:00:00 (xfr#902621, to-chk=2/968416)
-data/ff/ff/ffffe5eedcebb869f14ecf6cce5b5fcea629ae363ce833431bba46a19f8eb6c8
-             78 100%    0.49kB/s    0:00:00 (xfr#902622, to-chk=1/968416)
-data/ff/ff/ffffff8aa693c59e91b94e4de61d7ce035c69c94077ccf158e3d23a0a039216f
-        383,141 100%    2.12MB/s    0:00:00 (xfr#902623, to-chk=0/968416)
-
-sent 17,752,067 bytes  received 329,479,912,584 bytes  4,412,629.51 bytes/sec
-total size is 329,293,755,413  speedup is 1.00
-```
-
-Finally, the ```time``` program recorded and logged the duration of the transfer. 
-
-```
-real    1244m30.854s
-user    98m36.885s
-sys    55m19.359s
-```
-
-## Local Verification and Duplication
-
-After completing the transatlantic transfer onto a USB 3.0 Seagate Expansion HDD 18TB STKP180000402 PN 3EGAPR-570 connected using a Lenovo T430 running Ubuntu Ubuntu 20.04.5 LTS using Intel® Core™ i5-3320M CPU @ 2.60GHz × 4 and 8GB of memory, the content was duplicated locally to a WD Elements 5TB PN WDBU6Y0050BBK-XD.  The rsync local replication took a little over an hour (~81 minutes), and the preston-based verification took under 7 hours (322 minutes). The verification checks the local copy and verifies whether the reference content is actually present and has the expected content. Content verification is a computationally heavy operation because hundreds of thousands of files are processed and their cryptographic hashes are re-computed. The verification reported no missing or altered content. 
-
-
-## Transfer by USPS
-
-To demonstrate that the image corpus can be transferred without using the internet, the Seagate Expansion HDD 18TB containing the BRIT image corpus copy was labeled and shipped by US Postal Service on 16 Sept 2022.
-
-
-
-
 
