@@ -1,5 +1,7 @@
 by Jorrit H. Poelen 
+
 https://orcid.org/0000-0003-3138-4118 
+
 2022-09-15
 
 # On Enabling Fast and Secure Access to Herbarium Specimen Images
