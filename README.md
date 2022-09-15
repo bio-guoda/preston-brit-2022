@@ -150,9 +150,9 @@ On retrying the inaccessible content locations, only 33 remained inaccessible (s
 
 ## Data Transfer from Germany to US
 
-The BRIT images were originally tracked from Germany on a commercial "off-the-shelve" server. To facilitate access, and increase redudancy, rsync was used to transfer the image corpus from Germany to the Minnesota. 
+The BRIT images were originally tracked from Germany on a commercial "off-the-shelve" server. 
 
-After receiving storage hardware by mail on 4 Sept 2022, the BRIT image corpus hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 was received in Minnesota, US from Germany on 5 Sept 2022. The corpus spanned over 900k files / 309GB and was transferred in about 21h (see below for details) via a consumer grade fiber internet connection. 
+After receiving blank storage hardware by mail on 4 Sept 2022, the BRIT image corpus hash://sha256/76d40abccfc71bc2cdaf4ea4a6003b9ac49123b27abe9f0d81e233299baf5e94 was transferred from Germany to Minnesota, US on 5 Sept 2022 onto a USB 3.0 Seagate Expansion HDD 18TB STKP180000402 PN 3EGAPR-570 connected using a Lenovo T430 running Ubuntu Ubuntu 20.04.5 LTS using Intel® Core™ i5-3320M CPU @ 2.60GHz × 4 and 8GB of memory. The corpus spanned over 900k files / 309GB and was transferred in about 21h (see below for details) via a consumer grade fiber internet connection. 
 
 ![delivery](./brit-delivery-2022-09-04-A.jpeg)
 
@@ -188,8 +188,7 @@ sys    55m19.359s
 
 ## Local Verification and Duplication
 
-After completing the transatlantic transfer onto a USB 3.0 Seagate Expansion HDD 18TB STKP180000402 PN 3EGAPR-570 connected using a Lenovo T430 running Ubuntu Ubuntu 20.04.5 LTS using Intel® Core™ i5-3320M CPU @ 2.60GHz × 4 and 8GB of memory, the content was duplicated locally to a WD Elements 5TB PN WDBU6Y0050BBK-XD.  The rsync local replication took a little over an hour (~81 minutes), and the preston-based verification took under 7 hours (322 minutes). The verification checks the local copy and verifies whether the reference content is actually present and has the expected content. Content verification is a computationally heavy operation because hundreds of thousands of files are processed and their cryptographic hashes are re-computed. The verification reported no missing or altered content. 
-
+After receiving the corpus in Minnesota, the content was duplicated locally to a WD Elements 5TB PN WDBU6Y0050BBK-XD. The rsync local replication took a little over an hour (~81 minutes), and the preston-based verification took under 7 hours (322 minutes). The verification checks the local copy and verifies whether the reference content is actually present and has the expected content. Content verification is a computationally heavy operation because hundreds of thousands of files are processed and their cryptographic hashes are re-computed. The verification reported no missing or altered content. 
 
 ## Transfer by USPS
 
@@ -225,8 +224,7 @@ Jorrit Poelen, Michael Elliott, Icaro Alzuru, & partha04patel. (2022). bio-guoda
 
 # Appendix A
 
-Missing images 
-
+Missing images initial attempt
 ```
 https://bisque.cyverse.org/image_service/image/00-fXkw8KPeArtBjNrpPHtvTU/resize:1250/format:jpeg
 https://bisque.cyverse.org/image_service/image/00-cXkjNdUW9rKCE8etGzpHtg/resize:1250/format:jpeg
