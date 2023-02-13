@@ -9,4 +9,5 @@ preston ls\
 | jq --raw-output '.["http://rs.tdwg.org/ac/terms/accessURI"], .["http://rs.tdwg.org/ac/terms/thumbnailAccessURI"], .["http://rs.tdwg.org/ac/terms/goodQualityAccessURI"]'\
 | grep -v null\
 | grep cyverse\
-| grep -oP "https://bisque.cyverse.org/image_service/image/[^/]+"
+| grep -oP "00-[a-zA-Z0-9]+"\
+| sed 's+^+https://bisque.cyverse.org/blob_service/+g'
